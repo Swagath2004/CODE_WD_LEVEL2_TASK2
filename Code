@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    body {
+      background-color: #ffffffb2;
+      background-image: url("static_files/index Background.jpg");
+      /* background-attachment: fixed; */
+      background-repeat: no-repeat;
+      background-position: top left;
+      /* background: linear-gradient(120deg, #f0f4f8, #d9e8f5); */
+      font-family: "Arial", sans-serif;
+      color: #333;
+      cursor: none;
+    }
+
+    .welcome-section {
+      background-color: #ffffffb2;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .welcome-section h1 {
+      font-size: 2.5em;
+      color: #007bff;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .welcome-section p {
+      font-size: 1.2em;
+      color: #555;
+    }
+
+    .featured-jobs {
+      background-color: #ffffffb2;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .featured-jobs h2 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      color: #007bff;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .job-item {
+      display: inline-block;
+      padding: 15px 20px;
+      background: linear-gradient(15deg, #0062cc, #004085);
+      border: 1px solid #003366;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      color: #fff;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      min-width: 200px;
+    }
+
+    .job-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 100, 131, 0.5);
+      border-color: #0380d3;
+    }
+
+    .job-title {
+      font-weight: 700;
+      color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.5;
+    }
+
+    .job-title i {
+      margin-right: 10px;
+      font-size: 1.3em;
+    }
+
+    .marquee {
+      white-space: nowrap;
+      overflow: hidden;
+      margin-bottom: 5px;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 15s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+    .reviews-section {
+      background-color: #ffffff6e;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    .reviews-section h2 {
+      margin-bottom: 30px;
+      font-size: 2em;
+      color: #007bff;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .review-item {
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #e9ecef;
+      padding-bottom: 15px;
+    }
+
+    .review-item:last-child {
+      border-bottom: none;
+    }
+
+    .review-item img {
+      border-radius: 50%;
+      margin-right: 20px;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+    }
+
+    .review-text {
+      flex-grow: 1;
+    }
+
+    .review-text h4 {
+      margin: 0;
+      font-size: 1.2em;
+      color: #333;
+      font-weight: 700;
+    }
+
+    .review-stars {
+      background: linear-gradient(15deg, #0062cc, #004085);
+      -webkit-background-clip: text;
+      color: transparent;
+      display: inline-block;
+      font-size: 1.3em;
+    }
+
+    .review-stars i {
+      color: inherit;
+    }
+
+    .btn-custom {
+      background: linear-gradient(15deg, #007bff, #0056b3);
+      border: none;
+      color: #fff;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 1.2em;
+      text-align: center;
+      display: block;
+      margin: 30px auto;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-custom:hover {
+      background: linear-gradient(15deg, #0056b3, #003d7a);
+      transform: translateY(-3px);
+    }
+
+    .cursor {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #007bff;
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      transition: transform 0.1s ease;
+      background-color: rgba(0, 123, 255, 0.3);
+      mix-blend-mode: difference;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+    }
+
+    .cursor-glow {
+      box-shadow: 0 0 8px 4px rgba(0, 123, 255, 0.6);
+    }
+
+    .cursor-grow {
+      transform: scale(3);
+    }
+
+    .job-item:hover .cursor {
+      border-color: #ff6b6b;
+      background-color: rgba(255, 107, 107, 0.3);
+      box-shadow: 0 0 8px 4px rgba(0, 123, 255, 0.6);
+    }
+
+    .logo-icon {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      animation: rotate 5s linear infinite;
+    }
+
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(251, 255, 254, 0.596);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      display: none;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .footer {
+      background-color: #ffffffb2;
+      padding: 20px 0;
+      border-top: 1px solid #e9ecef;
+      margin-top: 30px;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .social-icon {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      margin: 0 10px;
+      font-size: 1.5em;
+      color: #6c757d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border-radius: 10px;
+      padding: 8px;
+      box-shadow: 5px 5px 10px #d9d9d9, -5px -5px 10px #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8f9fa;
+    }
+
+    .social-icon i {
+      margin: 0;
+    }
+
+    .social-icon:hover {
+      transform: translateY(-3px);
+      box-shadow: 8px 8px 15px #d9d9d9, -8px -8px 15px #ffffff;
+      color: #007bff;
+    }
+
+    .social-icon:hover i {
+      text-shadow: 0 0 10px rgba(0, 123, 255, 0.8);
+    }
+    
+    .induniverse-section {
+      background-color: #ffffffb2;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-top: 30px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    .induniverse-section h2 {
+      margin-bottom: 30px;
+      font-size: 2.5em;
+      color: #007bff;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .induniverse-section p {
+      font-size: 1.2em;
+      color: #555;
+      text-align: justify;
+      margin-bottom: 20px;
+    }
+
+    .induniverse-feature {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .induniverse-feature:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(204, 184, 184, 0.2);
+    }
+
+    .induniverse-feature i {
+      margin-bottom: 20%;
+      font-size: 2em;
+      color: #007bff;
+      margin-right: 20px;
+      min-width: 40px;
+      text-align: center;
+    }
+
+    .induniverse-map {
+      text-align: center;
+      margin-top: 0px;
+    }
+
+    .induniverse-map img {
+      max-width: 80%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .induniverse-map img:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(204, 184, 184, 0.2);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="loading-overlay">
+    <img src="static/looka.com_editor_192053877(Asus Zenbook Fold).png" alt="Rounded Logo Icon" class="logo-icon" />
+  </div>
+  <div class="container">
+    <div class="welcome-section">
+      <h1>Discover Your Future Career</h1>
+      <p>Explore top job opportunities and take the next step in your professional journey.</p>
+    </div>
+
+    <div class="featured-jobs">
+      <h2>Featured Jobs</h2>
+      <div class="marquee">
+        <span>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-code"></i> Software Engineer
+            </h3>
+          </div>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-cogs"></i> DevOps Engineer
+            </h3>
+          </div>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-pencil-ruler"></i> UI/UX Designer
+            </h3>
+          </div>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-chart-bar"></i> Data Scientist
+            </h3>
+          </div>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-cloud"></i> Cloud Architect
+            </h3>
+          </div>
+          <div class="job-item">
+            <h3 class="job-title">
+              <i class="fas fa-shield-alt"></i> Security Analyst
+            </h3>
+          </div>
+        </span>
+      </div>
+    </div>
+    <button class="btn-custom" onclick="showLoadingAndRedirect()">See Job Listings</button>
+    <div class="induniverse-section">
+      <h2>Why Choose Jobseeker for IndiGlobe?</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="induniverse-feature">
+            <i class="fas fa-bolt"></i>
+            <p>
+              <strong>Lightning-Fast Talent Matching:</strong> We understand the urgency of filling positions. With Jobseeker, get matched with qualified IndiGlobe candidates in as little as 24 hours, accelerating your hiring process.
+            </p>
+          </div>
+          <div class="induniverse-feature">
+            <i class="fas fa-globe"></i>
+            <p>
+              <strong>Timezone Alignment:</strong> Forget the hassle of scheduling across continents. We connect you with professionals who work in timezones compatible with your business, ensuring smooth communication and collaboration.
+            </p>
+          </div>
+          <div class="induniverse-feature">
+            <i class="fas fa-users"></i>
+            <p>
+              <strong>Cultural Fit Experts:</strong> Our platform goes beyond just skills and experience. We assess candidates for cultural compatibility, ensuring a seamless integration with your company values and team dynamics.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="induniverse-feature">
+            <i class="fas fa-network-wired"></i>
+            <p>
+              <strong>Extensive Ind-Globe Network:</strong> Tap into our vast network of skilled professionals across India & throughout the world. We have a diverse pool of talent, from tech specialists to creative marketers, ready to drive your business forward.
+            </p>
+          </div>
+          <div class="induniverse-feature">
+            <i class="fas fa-handshake"></i>
+            <p>
+              <strong>End-to-End Support:</strong> We're with you every step of the way. From refining your job description to onboarding your new hire, our dedicated support team ensures a hassle-free experience.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="induniverse-map">
+        <img src="https://www.gstatic.com/earth/social/00_generic_facebook-001.jpg" alt="IndiGlobe Map" />
+      </div>
+    </div>
+    <div class="reviews-section">
+      <h2>What Our Users Are Saying</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="review-item">
+            <img src="https://randomuser.me/api/portraits/men/10.jpg" alt="User 1" />
+            <div class="review-text">
+              <h4>John Does</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p>
+                Great platform! Found my dream job here. The UI is so easy to use
+                and the job recommendations are spot on!
+              </p>
+            </div>
+          </div>
+          <div class="review-item">
+            <img src="static/avatar-genbc0eac117dfbee52433f6f3161432f15-transformed.jpeg" alt="User 3" />
+            <div class="review-text">
+              <h4>Hailey Ferguson</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p>
+                Fantastic experience! The job listings are up-to-date and the
+                website is easy to navigate. Highly recommended!
+              </p>
+            </div>
+          </div>
+          <div class="review-item">
+            <img src="static/user_5.png" alt="User 5" />
+            <div class="review-text">
+              <h4>Rebecca Magdalene</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+              <p>
+                "This job board feels like a breath of fresh air compared to
+                others I've used. It's clean, modern, and incredibly
+                user-friendly. Keep up the great work!"
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="review-item">
+            <img src="https://randomuser.me/api/portraits/women/20.jpg" alt="User 2" />
+            <div class="review-text">
+              <h4>Camila Philips</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                The job board is incredibly helpful. I love the design and the
+                hover effects. It feels modern and professional.
+              </p>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <img src="static/user_4.png" alt="User 4" />
+            <div class="review-text">
+              <h4>Sharon Kimberley</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                "I was initially skeptical, but this job board exceeded my
+                expectations. The quality of the listings is outstanding, and the
+                overall user experience is top-notch."
+              </p>
+            </div>
+          </div>
+
+          <div class="review-item">
+            <img src="static/user_6.png" alt="User 6" />
+            <div class="review-text">
+              <h4>Daphne Agates</h4>
+              <div class="review-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                "As a software engineer, this platform made it so easy to find
+                relevant job opportunities. The interface is intuitive, the
+                listings are up-to-date, and I was able to secure a new position
+                quickly. Highly recommended for anyone in the tech industry!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p><strong>Copyright © 2024 Developed by Swagath</strong></p>
+            <div class="social-icons">
+              <a href="https://github.com/Swagath2004" target="_blank" class="social-icon github">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/tangudu-yoganand-swagath-790625295" target="_blank" class="social-icon linkedin">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="https://www.instagram.com/swagath_tangudu" target="_blank" class="social-icon instagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://www.facebook.com/swagath.tanguduyoganada" target="_blank" class="social-icon facebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</body>
+
+</html>
